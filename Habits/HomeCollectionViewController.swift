@@ -131,6 +131,7 @@ class HomeCollectionViewController: UICollectionViewController {
         }
     }
     
+    
     func updateCollectionView() {
         var sectionIDs = [ViewModel.Section]()
         
@@ -190,8 +191,86 @@ class HomeCollectionViewController: UICollectionViewController {
         
         var itemsBySection = [ViewModel.Section.leaderboard: leaderboardItems]
         
+        var followedUserItems = [ViewModel.Item]()
+        
+        // Get the current user's logged habits and extract the favorites.
+        let currentUserLoggedHabits = loggedHaabitNames(for: model.currentUser)
+        let favoriteLoggedHabites = Set(model.favoriteHabits.map { $0.name }).intersection(currentUserLoggedHabits)
+        
+        // Loop through all the followed users.
+        for followedUser in model.followedUsers.sorted(by: { $0.name < $1.name }) {
+            let message: String
+            
+            let followedUserLoggedHabits = loggedHaabitNames(for: followedUser)
+            
+            // If the users have a habit in common:
+            let commonLoggedHabits = followedUserLoggedHabits.intersection(currentUserLoggedHabits)
+            
+            if commonLoggedHabits.count > 0 {
+                // Pick the habit to focus on.
+                let habitName: String
+                let commonFavoriteLoggedHabits = favoriteLoggedHabites.intersection(commonLoggedHabits)
+                
+                if commonFavoriteLoggedHabits.count > 0 {
+                    habitName = commonFavoriteLoggedHabits.sorted().first!
+                } else {
+                    habitName = commonLoggedHabits.sorted().first!
+                }
+                // Get the full statistics (all the user counts) for that habit.
+                let habitStats = model.habitStatistics.first { $0.habit.name == habitName }!
+                
+                // Get the ranking for each user.
+                let rankedUserCounts = habitStats.userCounts.sorted { $0.count > $1.count }
+                let currentUserRanking = rankedUserCounts.firstIndex { $0.user == model.currentUser }!
+                let followedUserRanking = rankedUserCounts.firstIndex { $0.user == followedUser }!
+                
+                // Construct the message depending on who's leading.
+                if currentUserRanking < followedUserRanking {
+                    message = "Currently #\(ordinalString(from: followedUserRanking)), behind you (#\(ordinalString(from: currentUserRanking))) in \(habitName).\nSend them a friendly reminder!"
+                } else if currentUserRanking > followedUserRanking {
+                    message = "Currently #\(ordinalString(from: followedUserRanking)), ahead of you (#\(ordinalString(from: currentUserRanking))) in \(habitName).\nYou might catch up with a little effort!"
+                } else {
+                    message = "You're tied at #\(ordinalString(from: followedUserRanking)), in \(habitName)! Now's your chance to pull ahead."
+                }
+            // Otherwise, if the followed user has logged at least one habit:
+            } else if followedUserLoggedHabits.count > 0 {
+                // Get an arbitrary habit name.
+                let habitName = followedUserLoggedHabits.sorted().first!
+                
+                // Get the full statistics (all the user counts) for that habit.
+                let habitStats = model.habitStatistics.first { $0.habit.name == habitName }!
+                
+                // Get the user's ranking for that habit.
+                let rankedUserCounts = habitStats.userCounts.sorted { $0.count > $1.count }
+                let followedUserRanking = rankedUserCounts.firstIndex { $0.user == followedUser }!
+                
+                // Construct the message.
+                message = "Currently #\(ordinalString(from: followedUserRanking)), in \(habitName).\nMaybe you should give this a look."
+            // Otherwise, this user hasn't done anything.
+            } else {
+                message = "This user doesn't seem to have done much yet. Check in to see if they need any help getting started."
+            }
+            
+            followedUserItems.append(.followedUser(followedUser, message: message))
+        }
+        
+        sectionIDs.append(.followedUsers)
+        itemsBySection[.followedUsers] = followedUserItems
+        
         dataSource.applySnapshotUsing(sectionIDs: sectionIDs, itemsBySection: itemsBySection)
     }
+    
+    
+    func loggedHaabitNames(for user: User) -> Set<String> {
+        var names = [String]()
+        
+        if let stats = model.userStatistics.first(where: { $0.user == user }) {
+            names = stats.habitCounts.map { $0.habit.name }
+        }
+        
+        return Set(names)
+    }
+    
     
     static let formatter: NumberFormatter = {
         var f = NumberFormatter()
@@ -203,6 +282,7 @@ class HomeCollectionViewController: UICollectionViewController {
         return Self.formatter.string(from: NSNumber(integerLiteral: number + 1))!
     }
     
+    
     func createDataSource() -> DataSourceType {
         let dataSource = DataSourceType(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
             switch item {
@@ -212,13 +292,17 @@ class HomeCollectionViewController: UICollectionViewController {
                 cell.leaderLabel.text = leadingUserRanking
                 cell.secondaryLabel.text = secondaryUserRanking
                 return cell
-            default:
-                return nil
+            case .followedUser(let user, let message):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FollowedUser", for: indexPath) as! PrimarySecondaryTextCollectionViewCell
+                cell.primaryTextLabel.text = user.name
+                cell.secondaryTextLabel.text = message
+                return cell
             }
         }
         
         return dataSource
     }
+    
     
     func createLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, environment) -> NSCollectionLayoutSection? in
@@ -238,8 +322,16 @@ class HomeCollectionViewController: UICollectionViewController {
                 leaderboardSection.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 0, bottom: 20, trailing: 0)
                 
                 return leaderboardSection
-            default:
-                return nil
+            case .followedUsers:
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
+                let followedUserItem = NSCollectionLayoutItem(layoutSize: itemSize)
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
+                let followedUserGroup = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: followedUserItem, count: 1)
+                
+                let followedUserSection = NSCollectionLayoutSection(group: followedUserGroup)
+                
+                return followedUserSection
             }
         }
         return layout
