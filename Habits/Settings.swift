@@ -61,6 +61,18 @@ struct Settings {
             archiveJSON(value: newValue, key: Setting.followedUserIDs)
         }
     }
+    
+    mutating func toggleFollowed(user: User) {
+        var updated = followedUserIDs
+        
+        if updated.contains(user.id) {
+            updated
+                = updated.filter { $0 != user.id }
+        } else {
+            updated.append(user.id)
+        }
+        followedUserIDs = updated
+    }
 }
 
 
