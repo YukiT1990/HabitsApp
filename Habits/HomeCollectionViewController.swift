@@ -7,6 +7,12 @@
 
 import UIKit
 
+class SectionBackgroundView: UICollectionReusableView {
+    override func didMoveToSuperview() {
+        backgroundColor = .systemGray6
+    }
+}
+
 enum SupplementaryItemType {
     case collectionSupplementaryView
     case layoutDecorationView
@@ -33,11 +39,7 @@ extension SupplementaryItem {
     }
 }
 
-class SectionBackgroundView: UICollectionReusableView {
-    override func didMoveToSuperview() {
-        backgroundColor = .systemGray6
-    }
-}
+
 
 
 class HomeCollectionViewController: UICollectionViewController {
@@ -76,7 +78,8 @@ class HomeCollectionViewController: UICollectionViewController {
                 return SectionBackgroundView.self
             case .leaderboardGroupBackground:
                 return UICollectionReusableView.self
-            default: return NamedSectionHeaderView.self
+            default:
+                return NamedSectionHeaderView.self
             }
         }
         
@@ -362,9 +365,16 @@ class HomeCollectionViewController: UICollectionViewController {
                 cell.secondaryLabel.text = secondaryUserRanking
                 return cell
             case .followedUser(let user, let message):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FollowedUser", for: indexPath) as! PrimarySecondaryTextCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FollowedUser", for: indexPath) as! FollowedUserCollectionViewCell
                 cell.primaryTextLabel.text = user.name
                 cell.secondaryTextLabel.text = message
+                
+                if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - 1 {
+                    cell.separatorLineView.isHidden = true
+                } else {
+                    cell.separatorLineView.isHidden = false
+                }
+                
                 return cell
             }
         }
@@ -378,6 +388,13 @@ class HomeCollectionViewController: UICollectionViewController {
             case .leaderboardGroupBackground:
                 view.backgroundColor = UIColor(hue: 0.65, saturation: 0.1, brightness: 0.95, alpha: 1)
                 view.layer.cornerRadius = 12
+                
+                view.layer.shadowRadius = 3
+                view.layer.shadowColor = UIColor.systemGray3.cgColor
+                view.layer.shadowOffset = CGSize(width: 0, height: 2)
+                view.layer.shadowOpacity = 1
+                view.layer.masksToBounds = false
+                
                 return view
             case .leaderboardSectionHeader:
                 let header = view as! NamedSectionHeaderView
@@ -442,6 +459,8 @@ class HomeCollectionViewController: UICollectionViewController {
                 let followedUserGroup = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: followedUserItem, count: 1)
                 
                 let followedUserSection = NSCollectionLayoutSection(group: followedUserGroup)
+                
+//                followedUserSection.interGroupSpacing = 5  // deleted in Part Eleven
                 
                 let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60))
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: SupplementaryView.followedUserSectionHeader.viewKind, alignment: .top)

@@ -35,6 +35,7 @@
 		612D78B525D817B600AD9D37 /* LoggedHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612D78B425D817B600AD9D37 /* LoggedHabit.swift */; };
 		619EB27925D90E9800CC42DF /* LeaderboardHabitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619EB27825D90E9800CC42DF /* LeaderboardHabitCollectionViewCell.swift */; };
 		619EB27C25D91A8F00CC42DF /* CombinesStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619EB27B25D91A8F00CC42DF /* CombinesStatistics.swift */; };
+		619EB28125DA222400CC42DF /* FollowedUserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619EB28025DA222400CC42DF /* FollowedUserCollectionViewCell.swift */; };
 		61F44E1625D6B2EC00BB088A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F44E1525D6B2EC00BB088A /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,7 @@
 		612D78B425D817B600AD9D37 /* LoggedHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedHabit.swift; sourceTree = "<group>"; };
 		619EB27825D90E9800CC42DF /* LeaderboardHabitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardHabitCollectionViewCell.swift; sourceTree = "<group>"; };
 		619EB27B25D91A8F00CC42DF /* CombinesStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinesStatistics.swift; sourceTree = "<group>"; };
+		619EB28025DA222400CC42DF /* FollowedUserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedUserCollectionViewCell.swift; sourceTree = "<group>"; };
 		61F44E1525D6B2EC00BB088A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +130,7 @@
 				610FA93125D5441800D73863 /* LogHabitCollectionViewController.swift */,
 				612D78B425D817B600AD9D37 /* LoggedHabit.swift */,
 				610FA92825D543BA00D73863 /* HomeCollectionViewController.swift */,
+				619EB28025DA222400CC42DF /* FollowedUserCollectionViewCell.swift */,
 				619EB27B25D91A8F00CC42DF /* CombinesStatistics.swift */,
 				610FA91C25D5388600D73863 /* Assets.xcassets */,
 				610FA91E25D5388600D73863 /* LaunchScreen.storyboard */,
@@ -227,6 +230,7 @@
 				610FA95225D6622E00D73863 /* UICollectionViewDiffableDataSource+ViewModel.swift in Sources */,
 				610FA91625D5388600D73863 /* SceneDelegate.swift in Sources */,
 				610FA94C25D5E70400D73863 /* PrimarySecondaryTextCollectionViewCell.swift in Sources */,
+				619EB28125DA222400CC42DF /* FollowedUserCollectionViewCell.swift in Sources */,
 				610FA93E25D5D53B00D73863 /* Category.swift in Sources */,
 				610FA92F25D543FB00D73863 /* UserCollectionViewController.swift in Sources */,
 				612D78B525D817B600AD9D37 /* LoggedHabit.swift in Sources */,

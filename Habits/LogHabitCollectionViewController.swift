@@ -7,8 +7,6 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
 class LogHabitCollectionViewController: HabitCollectionViewController {
 
     override func createLayout() -> UICollectionViewCompositionalLayout {
@@ -56,8 +54,17 @@ class LogHabitCollectionViewController: HabitCollectionViewController {
         
         LogHabitRequest(trackedEvent: loggedHabit).send { _ in }
         
-        print("Settings.shared.currentUser \(Settings.shared.currentUser)")
-        print("item.habit.name \(item.habit.name)")
+        collectionView.deselectItem(at: indexPath, animated: true)
+    }
+    
+    override func configureCell(_ cell: PrimarySecondaryTextCollectionViewCell, withItem item: ViewModel.Item) {
+        cell.primaryTextLabel.text = item.habit.name
+        cell.layer.cornerRadius = 8
+        if Settings.shared.favoriteHabits.contains(item.habit) {
+            cell.backgroundColor = favoriteHabitColor
+        } else {
+            cell.backgroundColor = .systemGray6
+        }
     }
 
 }
