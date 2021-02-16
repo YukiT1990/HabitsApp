@@ -106,37 +106,69 @@
 			children = (
 				610FA91325D5388600D73863 /* AppDelegate.swift */,
 				610FA91525D5388600D73863 /* SceneDelegate.swift */,
-				610FA91725D5388600D73863 /* ViewController.swift */,
+				617DA2D425DC884000B03EBD /* ViewControllers */,
 				610FA91925D5388600D73863 /* Main.storyboard */,
-				619EB27825D90E9800CC42DF /* LeaderboardHabitCollectionViewCell.swift */,
-				610FA94B25D5E70400D73863 /* PrimarySecondaryTextCollectionViewCell.swift */,
-				610FA93A25D5D4E400D73863 /* Habit.swift */,
-				610FA93D25D5D53B00D73863 /* Category.swift */,
-				610FA94025D5D5B000D73863 /* Color.swift */,
+				617DA2D625DC886A00B03EBD /* CollectionViewCells */,
+				617DA2D125DC878100B03EBD /* Modals */,
 				610FA94425D5D7F300D73863 /* APIRequest.swift */,
 				610FA94725D5E06F00D73863 /* APIService.swift */,
 				610FA95425D680B400D73863 /* NamedSectionHeaderView.swift */,
-				610FA95125D6622E00D73863 /* UICollectionViewDiffableDataSource+ViewModel.swift */,
 				610FA94E25D6459200D73863 /* Settings.swift */,
-				61F44E1525D6B2EC00BB088A /* User.swift */,
-				610FA93425D546EA00D73863 /* HabitDetailViewController.swift */,
-				610FA92B25D543E300D73863 /* HabitCollectionViewController.swift */,
-				612D78A325D7616000AD9D37 /* HabitStatistics.swift */,
-				612D78A625D7623100AD9D37 /* UserCount.swift */,
-				610FA93725D5470100D73863 /* UserDetailViewController.swift */,
-				610FA92E25D543FB00D73863 /* UserCollectionViewController.swift */,
-				612D78AB25D7DF6700AD9D37 /* UserStatistics.swift */,
-				612D78AF25D7E02300AD9D37 /* HabitCount.swift */,
-				610FA93125D5441800D73863 /* LogHabitCollectionViewController.swift */,
-				612D78B425D817B600AD9D37 /* LoggedHabit.swift */,
-				610FA92825D543BA00D73863 /* HomeCollectionViewController.swift */,
-				619EB28025DA222400CC42DF /* FollowedUserCollectionViewCell.swift */,
-				619EB27B25D91A8F00CC42DF /* CombinesStatistics.swift */,
+				617DA2D825DC888F00B03EBD /* CollectionViewControllers */,
 				610FA91C25D5388600D73863 /* Assets.xcassets */,
 				610FA91E25D5388600D73863 /* LaunchScreen.storyboard */,
 				610FA92125D5388600D73863 /* Info.plist */,
 			);
 			path = Habits;
+			sourceTree = "<group>";
+		};
+		617DA2D125DC878100B03EBD /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				610FA93A25D5D4E400D73863 /* Habit.swift */,
+				61F44E1525D6B2EC00BB088A /* User.swift */,
+				610FA93D25D5D53B00D73863 /* Category.swift */,
+				610FA94025D5D5B000D73863 /* Color.swift */,
+				610FA95125D6622E00D73863 /* UICollectionViewDiffableDataSource+ViewModel.swift */,
+				612D78AF25D7E02300AD9D37 /* HabitCount.swift */,
+				612D78B425D817B600AD9D37 /* LoggedHabit.swift */,
+				612D78A625D7623100AD9D37 /* UserCount.swift */,
+				612D78AB25D7DF6700AD9D37 /* UserStatistics.swift */,
+				619EB27B25D91A8F00CC42DF /* CombinesStatistics.swift */,
+				612D78A325D7616000AD9D37 /* HabitStatistics.swift */,
+			);
+			path = Modals;
+			sourceTree = "<group>";
+		};
+		617DA2D425DC884000B03EBD /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				610FA91725D5388600D73863 /* ViewController.swift */,
+				610FA93425D546EA00D73863 /* HabitDetailViewController.swift */,
+				610FA93725D5470100D73863 /* UserDetailViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		617DA2D625DC886A00B03EBD /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				619EB27825D90E9800CC42DF /* LeaderboardHabitCollectionViewCell.swift */,
+				610FA94B25D5E70400D73863 /* PrimarySecondaryTextCollectionViewCell.swift */,
+				619EB28025DA222400CC42DF /* FollowedUserCollectionViewCell.swift */,
+			);
+			path = CollectionViewCells;
+			sourceTree = "<group>";
+		};
+		617DA2D825DC888F00B03EBD /* CollectionViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				610FA92B25D543E300D73863 /* HabitCollectionViewController.swift */,
+				610FA92E25D543FB00D73863 /* UserCollectionViewController.swift */,
+				610FA93125D5441800D73863 /* LogHabitCollectionViewController.swift */,
+				610FA92825D543BA00D73863 /* HomeCollectionViewController.swift */,
+			);
+			path = CollectionViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
