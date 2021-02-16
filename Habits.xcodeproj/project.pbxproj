@@ -109,9 +109,8 @@
 				617DA2D425DC884000B03EBD /* ViewControllers */,
 				610FA91925D5388600D73863 /* Main.storyboard */,
 				617DA2D625DC886A00B03EBD /* CollectionViewCells */,
-				617DA2D125DC878100B03EBD /* Modals */,
-				610FA94425D5D7F300D73863 /* APIRequest.swift */,
-				610FA94725D5E06F00D73863 /* APIService.swift */,
+				617DA2D125DC878100B03EBD /* Models */,
+				615A257025DC8A7E00F510F5 /* APIs */,
 				610FA95425D680B400D73863 /* NamedSectionHeaderView.swift */,
 				610FA94E25D6459200D73863 /* Settings.swift */,
 				617DA2D825DC888F00B03EBD /* CollectionViewControllers */,
@@ -122,7 +121,16 @@
 			path = Habits;
 			sourceTree = "<group>";
 		};
-		617DA2D125DC878100B03EBD /* Modals */ = {
+		615A257025DC8A7E00F510F5 /* APIs */ = {
+			isa = PBXGroup;
+			children = (
+				610FA94425D5D7F300D73863 /* APIRequest.swift */,
+				610FA94725D5E06F00D73863 /* APIService.swift */,
+			);
+			path = APIs;
+			sourceTree = "<group>";
+		};
+		617DA2D125DC878100B03EBD /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				610FA93A25D5D4E400D73863 /* Habit.swift */,
@@ -137,7 +145,7 @@
 				619EB27B25D91A8F00CC42DF /* CombinesStatistics.swift */,
 				612D78A325D7616000AD9D37 /* HabitStatistics.swift */,
 			);
-			path = Modals;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		617DA2D425DC884000B03EBD /* ViewControllers */ = {
