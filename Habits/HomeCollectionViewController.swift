@@ -261,7 +261,7 @@ class HomeCollectionViewController: UICollectionViewController {
         
         sectionIDs.append(.leaderboard)
         
-        var itemsBySection = [ViewModel.Section.leaderboard: leaderboardItems]
+        var itemsBySection = [ViewModel.Section.leaderboard: leaderboardItems]  // Page 866
         
         var followedUserItems = [ViewModel.Item]()
         

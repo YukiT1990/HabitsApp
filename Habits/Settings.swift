@@ -17,7 +17,7 @@ struct Settings {
     
     private let defaults = UserDefaults.standard
     
-    let currentUser = User(id: "user40", name: "Active User", color: nil, bio: nil)
+    let currentUser = User(id: "activeUser", name: "Active User", color: nil, bio: nil)
     
     private func archiveJSON<T: Encodable>(value: T, key: String) {
         let data = try! JSONEncoder().encode(value)
